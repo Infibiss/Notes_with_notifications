@@ -1,0 +1,12 @@
+*.o
+*.c
+*.exe
+*.layout
+*.depend
+*.cbp
+*.a
+*.doc
+*.docx
+*.pdf
+*.png
+*.xlsx
