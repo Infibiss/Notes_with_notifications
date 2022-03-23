@@ -3,7 +3,7 @@
 #### If you found bugs, please write me in private messages
 
 #### Description:
-##### You can work with your notes from the Console.exe and get notifications. Notifications will appear on the nearest time you have chosen _(Will be fixed soon)_.
+##### You can write your notes and get notifications.
 
 #### Instruction:
 1) Compile Console.cpp and Background.cpp and get .exe files.
