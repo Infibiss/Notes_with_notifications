@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include <ctime>
+#include <iostream>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ bool CheckTime()
 	int ryear = (realtime[20] - '0') * 1000 + (realtime[21] - '0') * 100 + (realtime[22] - '0') * 10 + (realtime[23] - '0');
 	int realh = (realtime[11] - '0') * 10 + (realtime[12] - '0'), realm = (realtime[14] - '0') * 10 + (realtime[15] - '0');
 
-	if(realh == h && realm == m && ryear == year && rmonth == month && rday == day)
+	if(realh >= h && realm >= m && ryear >= year && rmonth >= month && rday >= day)
 		return true;
 	else
 		return false;
@@ -69,8 +70,28 @@ void GetNote(vector <string> result, string &note)
 		note += result[i];
 }
 
+void Mark(int pos)
+{
+	vector <string> text;
+
+	ifstream inp("NOTES.txt");
+	string s;
+	for(int i = 1; getline(inp, s); i++){
+		if(pos == i)
+			s += " *";
+		text.push_back(s);			
+	}
+	inp.close();
+
+	ofstream out("NOTES.txt");
+	for(int i = 0; i < text.size(); i++)
+        out << text[i] << '\n';
+	out.close();
+}
+
 int main()
 {
+
 	HWND hWnd = GetConsoleWindow();
 	ShowWindow(hWnd, SW_HIDE);
 
@@ -78,7 +99,10 @@ int main()
 		ifstream in("NOTES.txt");
 
 		string s;
-		while(getline(in, s)){
+		for(int i = 1; getline(in, s); i++){
+			if(s == "") break;
+			if(s[s.size() - 1] == '*') continue;
+
 			vector <string> result;
 			split(result, s, '-');
 
@@ -90,6 +114,7 @@ int main()
 				GetNote(result, note);
 
 				MessageBox(NULL, &note[0], "NOTE", MB_OK);
+				Mark(i);
 			}
 		}
 		in.close();

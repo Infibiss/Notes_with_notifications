@@ -98,7 +98,7 @@ void GetNote(vector <string> &result, string &note)
 		note += result[i];
 }
 
-void del(int pos)
+void Delete(int pos)
 {
 	vector <string> text;
 
@@ -142,9 +142,8 @@ int main()
 				GetNote(result, note);
 
 				string res = note + " - " + date + " - " + timer;
-				ofstream out("NOTES.txt", ios::in);
-				out.seekp(0, ios::end);
-				out.write(res.c_str(), strlen(res.c_str()));
+				ofstream out("NOTES.txt", ios::app);
+				out << res;
 				out << '\n';
 				out.close();
 
@@ -154,7 +153,7 @@ int main()
 				printy("\nType <position of the note>\n");
 				int pos; cin >> pos;
 
-				del(pos);
+				Delete(pos);
 
 				printg("Success!\n\n");
 			}
@@ -162,8 +161,18 @@ int main()
 				ifstream in("NOTES.txt");
 				string s; bool flag = false;
 				cout << '\n';
-				for(int i = 1; getline(in, s); i++)
-					{flag = true; yellow(); cout << i << ") " << s << '\n'; white();}
+				for(int i = 1; getline(in, s); i++){
+					flag = true; 
+					yellow();
+					cout << i << ") ";
+					for(int j = 0; j < s.size(); j++){
+						if(j + 1 == s.size() && s[j] == '*')
+							green();
+						cout << s[j];
+					}
+					cout << '\n';
+					white();
+				}
 				if(!flag) printy("[Empty]\n");
 				cout << '\n';
 				in.close();
@@ -178,9 +187,7 @@ int main()
 			}
 			else if(s != "")
 				throw 1;
-
 		}
-
 	}
 
 	catch (int err){

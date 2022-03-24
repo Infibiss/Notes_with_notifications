@@ -3,7 +3,7 @@
 #### If you found bugs, please write me in private messages
 
 #### Description:
-##### You can write your notes and get notifications.
+##### You can write your notes and get notifications. Note that was sent will be marked with *
 
 #### Instruction:
 1) Compile Console.cpp and Background.cpp and get .exe files.
