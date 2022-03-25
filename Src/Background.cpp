@@ -91,7 +91,6 @@ void Mark(int pos)
 
 int main()
 {
-
 	HWND hWnd = GetConsoleWindow();
 	ShowWindow(hWnd, SW_HIDE);
 
@@ -113,7 +112,7 @@ int main()
 				string note = "";
 				GetNote(result, note);
 
-				MessageBox(NULL, &note[0], "NOTE", MB_OK);
+				MessageBox(NULL, &note[0], "NOTE", MB_SYSTEMMODAL | MB_ICONASTERISK | MB_ICONWARNING);
 				Mark(i);
 			}
 		}
