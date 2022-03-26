@@ -19,29 +19,10 @@ void split(vector <string> &result, string &s, char delim)
 
 bool CheckTime()
 {
-	time_t now = time(0);
-	char* realtime = ctime(&now);
-	int rday = (realtime[8] - '0') * 10 + (realtime[9] - '0'); 
-	int rmonth; string rm = {realtime[4], realtime[5], realtime[6]};
-	if(rm == "Jar")      rmonth = 1;
-	else if(rm == "Feb") rmonth = 2;
-	else if(rm == "Mar") rmonth = 3;
-	else if(rm == "Apr") rmonth = 4;
-	else if(rm == "May") rmonth = 5;
-	else if(rm == "Jun") rmonth = 6;
-	else if(rm == "Jul") rmonth = 7;
-	else if(rm == "Aug") rmonth = 8;
-	else if(rm == "Sep") rmonth = 9;
-	else if(rm == "Oct") rmonth = 10;
-	else if(rm == "Nov") rmonth = 11;
-	else if(rm == "Dec") rmonth = 12;
-	int ryear = (realtime[20] - '0') * 1000 + (realtime[21] - '0') * 100 + (realtime[22] - '0') * 10 + (realtime[23] - '0');
-	int realh = (realtime[11] - '0') * 10 + (realtime[12] - '0'), realm = (realtime[14] - '0') * 10 + (realtime[15] - '0');
+	SYSTEMTIME r;
+	GetLocalTime(&r);
 
-	if(realh >= h && realm >= m && ryear >= year && rmonth >= month && rday >= day)
-		return true;
-	else
-		return false;
+	return (r.wHour >= h && r.wMinute >= m && r.wYear >= year && r.wMonth >= month && r.wDay >= day);
 }
 
 void GetDate(string &s)
@@ -117,7 +98,7 @@ int main()
 			}
 		}
 		in.close();
-		Sleep(30000);	
+		Sleep(20000);	
 	}
 	
 	return 0;
